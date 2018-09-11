@@ -7,5 +7,6 @@ const board = new five.Board({
 board.on('ready', () => {
   // Create an Led on pin 7 on header P1 (GPIO4) and strobe it on/off
   const led = new five.Led('P1-7');
+  console.log("Starting Blink");
   led.strobe(500);
 });
