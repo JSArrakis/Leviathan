@@ -1,12 +1,19 @@
-const raspi = require('raspi-io');
-const five = require('johnny-five');
-const board = new five.Board({
-  io: new raspi()
+var five = require("johnny-five");
+
+// Johnny-Five will try its hardest to detect the port for you,
+// however you may also explicitly specify the port by passing
+// it as an optional property to the Board constructor:
+var board = new five.Board({
+  port: "/dev/ttyACM0"
 });
 
-board.on('ready', () => {
-  // Create an Led on pin 7 on header P1 (GPIO4) and strobe it on/off
-  const led = new five.Led('P1-7');
-  console.log("Starting Blink");
-  led.strobe(500);
+// The board's pins will not be accessible until
+// the board has reported that it is ready
+board.on("ready", function() {
+  this.pinMode(13, this.MODES.OUTPUT);
+
+  this.loop(500, () => {
+    // Whatever the last value was, write the opposite
+    this.digitalWrite(13, this.pins[13].value ? 0 : 1);
+  });
 });
