@@ -26,6 +26,8 @@ var io = require("socket.io")(server);
 //   port: "/dev/ttyACM0"
 // });
 
+console.log("Ready!");
+
 io.on("connection", function(socket) {
     socket.on("data", function(data){
         console.log(data);
