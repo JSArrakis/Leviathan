@@ -28,9 +28,12 @@ var board = new five.Board({
 
 console.log("Ready!");
 
+var blinkRate = 500;
+
 io.on("connection", function(socket) {
     socket.on("data", function(data){
-        console.log(data);
+        blinkRate = data * 50;
+        console.log(blinkRate);
     });
 });
 
