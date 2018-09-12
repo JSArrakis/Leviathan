@@ -38,7 +38,7 @@ board.on("ready", function() {
 });
 
 app.get("/", function (req, res) {
-  res.sendFile("/home/pi/Leviathan/realtime.html");
+  res.sendFile("/home/pi/Leviathan/index.html");
 });
 
 server.listen(3000);
