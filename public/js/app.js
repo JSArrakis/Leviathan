@@ -20,7 +20,7 @@ function handler (req, res) {
 
                 if (error) {
                     res.writeHead(500);
-                    return res.end("Error: unable to load index.html");
+                    return res.end("Error: unable to load " +__dirname+"/public/index.html");
                 }
 
                 res.writeHead(200,{'Content-Type': 'text/html'});
