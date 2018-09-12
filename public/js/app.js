@@ -1,22 +1,3 @@
-// var five = require("johnny-five");
-
-// // Johnny-Five will try its hardest to detect the port for you,
-// // however you may also explicitly specify the port by passing
-// // it as an optional property to the Board constructor:
-// var board = new five.Board({
-//   port: "/dev/ttyACM0"
-// });
-
-// // The board's pins will not be accessible until
-// // the board has reported that it is ready
-// board.on("ready", function() {
-//   this.pinMode(13, this.MODES.OUTPUT);
-
-//   this.loop(500, () => {
-//     // Whatever the last value was, write the opposite
-//     this.digitalWrite(13, this.pins[13].value ? 0 : 1);
-//   });
-// });
 
 var app = require("express")();
 var server = require("http").Server(app);
@@ -28,23 +9,18 @@ var board = new five.Board({
 
 console.log("Ready!");
 
-var blinkRate = 500;
 
 io.on("connection", function(socket) {
-    socket.on("data", function(data){
-        blinkRate = data * 50;
-        console.log(blinkRate);
-    });
+    board.on("ready", function() {
+        var led = new five.Led(13);
+        led.blink(1000);
+        socket.on("data", function(data){
+            var blinkRate = data * 10;
+            console.log(blinkRate);
+        });
+    }); 
 });
 
-board.on("ready", function() {
-  this.pinMode(13, this.MODES.OUTPUT);
-
-  this.loop(blinkRate, () => {
-    // Whatever the last value was, write the opposite
-    this.digitalWrite(13, this.pins[13].value ? 0 : 1);
-  });
-});
 
 app.get("/", function (req, res) {
   res.sendFile("/home/pi/Leviathan/public/index.html");
