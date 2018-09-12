@@ -11,7 +11,7 @@
         var val = $(this).val();
         // Full Cycle: HIGH -> LOW, 2 phases
         display.text((1000 / (val * 2)).toFixed(2));
-        socket.emit("change:interval", val);
+        socket.emit("data", val);
         console.log("Emitting value:", val);
       });
     });

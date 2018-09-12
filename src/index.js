@@ -32,7 +32,8 @@ board.on("ready", function() {
   console.log("Blink started at default interval of 1000ms");
 
   io.on("connection", function(socket) {
-    socket.on("change:interval", function(data) {
+    console.log("Connected to Socket");
+    socket.on("data", function(data) {
       console.log("New interval: " + data + "ms");
       led.blink(data);
     });
