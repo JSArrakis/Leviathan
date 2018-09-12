@@ -1,4 +1,4 @@
-var socket = io('http://localhost:5000');
+var socket = io('http://192.168.1.25:5000');
 
 socket.on('example-pong', function (data) {
     console.log("pong");
