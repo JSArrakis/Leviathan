@@ -15,8 +15,9 @@ io.on("connection", function(socket) {
         var led = new five.Led(13);
         led.blink(1000);
         socket.on("data", function(data){
-            var blinkRate = data * 10;
+            var blinkRate = data * 100;
             console.log(blinkRate);
+            led.blink(blinkRate);
         });
     }); 
 });
