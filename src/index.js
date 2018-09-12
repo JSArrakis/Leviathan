@@ -29,9 +29,11 @@ var board = new five.Board({
 board.on("ready", function() {
   var led = new five.Led(13);
   led.blink(1000);
+  console.log("Blink started at default interval of 1000ms");
 
   io.on("connection", function(socket) {
     socket.on("change:interval", function(data) {
+      console.log("New interval: " + data + "ms");
       led.blink(data);
     });
   });
