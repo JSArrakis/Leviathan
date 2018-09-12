@@ -15,12 +15,12 @@ function handler (req, res) {
 
     // Managing the root route
     if (path == '/') {
-        index = fs.readFile(__dirname+'/public/index.html', 
+        index = fs.readFile( '../index.html', 
             function(error,data) {
 
                 if (error) {
                     res.writeHead(500);
-                    return res.end("Error: unable to load " +__dirname+"/public/index.html");
+                    return res.end("Error: unable to load index.html");
                 }
 
                 res.writeHead(200,{'Content-Type': 'text/html'});
