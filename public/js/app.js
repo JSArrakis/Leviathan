@@ -1,65 +1,46 @@
-var app = require('http').createServer(handler)
-var io = require('socket.io')(app)
-var url = require('url')
-var fs = require('fs')
+// var five = require("johnny-five");
 
+// // Johnny-Five will try its hardest to detect the port for you,
+// // however you may also explicitly specify the port by passing
+// // it as an optional property to the Board constructor:
+// var board = new five.Board({
+//   port: "/dev/ttyACM0"
+// });
 
-//This will open a server at localhost:5000. Navigate to this in your browser.
-app.listen(5000);
+// // The board's pins will not be accessible until
+// // the board has reported that it is ready
+// board.on("ready", function() {
+//   this.pinMode(13, this.MODES.OUTPUT);
 
-// Http handler function
-function handler (req, res) {
+//   this.loop(500, () => {
+//     // Whatever the last value was, write the opposite
+//     this.digitalWrite(13, this.pins[13].value ? 0 : 1);
+//   });
+// });
 
-    // Using URL to parse the requested URL
-    var path = url.parse(req.url).pathname;
+var app = require("express")();
+var server = require("http").Server(app);
+var io = require("socket.io")(server);
+// var five = require("johnny-five");
+// var board = new five.Board({
+//   port: "/dev/ttyACM0"
+// });
 
-    // Managing the root route
-    if (path == '/') {
-        index = fs.readFile( '/home/pi/Leviathan/public/index.html', 
-            function(error,data) {
-
-                if (error) {
-                    res.writeHead(500);
-                    return res.end("Error: unable to load index.html");
-                }
-
-                res.writeHead(200,{'Content-Type': 'text/html'});
-                res.end(data);
-            });
-    // Managing the route for the javascript files
-    } else if( /\.(js)$/.test(path) ) {
-        index = fs.readFile(__dirname+'/public'+path, 
-            function(error,data) {
-
-                if (error) {
-                    res.writeHead(500);
-                    return res.end("Error: unable to load " + path);
-                }
-
-                res.writeHead(200,{'Content-Type': 'text/plain'});
-                res.end(data);
-            });
-    } else {
-        res.writeHead(404);
-        res.end("Error: 404 - File not found.");
-    }
-
-}
-
-// Web Socket Connection
-io.sockets.on('connection', function (socket) {
-
-    // If we recieved a command from a client to start watering lets do so
-    socket.on('example-ping', function(data) {
-        console.log("ping");
-  
-        delay = data["duration"];
-  
-        // Set a timer for when we should stop watering
-        setTimeout(function(){
-            socket.emit("example-pong");
-        }, delay*1000);
-  
+io.on("connection", function(socket) {
+    socket.on("data", function(data){
+        console.log(data);
     });
+});
+
+// board.on("ready", function() {
+//   var led = new five.Led(13);
+//   led.blink(1000);
+
   
-  });
+// });
+
+app.get("/", function (req, res) {
+  res.sendFile("/home/pi/Leviathan/index.html");
+});
+
+server.listen(3000);

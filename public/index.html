@@ -1,14 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html>
 <head>
-  <title>Test</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="//cdn.socket.io/socket.io-1.2.1.js"></script>
+  <script>
+    $(function() {
+      var socket = io.connect("localhost:3000");
+      var display = $("h1 span");
+      $("#slider").on("input",function() {
+        var val = $(this).val();
+        display.text(val);
+        socket.emit("data", val);
+      });
+    });
+  </script>
 </head>
 <body>
-  <button id="hello" type="button">
-      Click me!
-  </button>
+  <h1>Current Val: <span>10</span></h1>
+  Fast <input id="slider" type="range" min="1" max="10" value="10"> Slow
 </body>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js"></script>
-  <script src="/js/client.js"></script>
 </html>
