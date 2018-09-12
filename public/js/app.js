@@ -15,7 +15,7 @@ function handler (req, res) {
 
     // Managing the root route
     if (path == '/') {
-        index = fs.readFile( '../index.html', 
+        index = fs.readFile( '/home/pi/Leviathan/public/index.html', 
             function(error,data) {
 
                 if (error) {
