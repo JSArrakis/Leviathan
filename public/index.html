@@ -5,7 +5,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
   <script>
     $(function() {
-      var socket = io.connect("localhost:3000");
+      var socket = io.connect("192.168.1.25:3000");
       var display = $("h1 span");
       console.log('check 1', socket.connected);
       socket.on('connect', function() {
