@@ -38,8 +38,12 @@ io.on("connection", function(socket) {
 });
 
 board.on("ready", function() {
-  var led = new five.Led(13);
-  led.blink(1000);
+  this.pinMode(13, this.MODES.OUTPUT);
+
+  this.loop(blinkRate, () => {
+    // Whatever the last value was, write the opposite
+    this.digitalWrite(13, this.pins[13].value ? 0 : 1);
+  });
 });
 
 app.get("/", function (req, res) {
