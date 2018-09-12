@@ -40,7 +40,7 @@ io.on("connection", function(socket) {
 // });
 
 app.get("/", function (req, res) {
-  res.sendFile("/home/pi/Leviathan/index.html");
+  res.sendFile("/home/pi/Leviathan/public/index.html");
 });
 
 server.listen(3000);
