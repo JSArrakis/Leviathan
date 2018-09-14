@@ -12,13 +12,14 @@ console.log("Ready!");
 
 io.on("connection", function(socket) {
     board.on("ready", function() {
-        var led = new five.Led(13);
-        led.blink(1000);
-        socket.on("data", function(data){
-            var blinkRate = data * 100;
-            console.log(blinkRate);
-            led.blink(blinkRate);
+        var servo = new five.Servo(10);
+        this.repl.inject({
+            servo: servo
         });
+        socket.on("data", function(data){
+
+        });
+        servo.sweep();
     }); 
 });
 
