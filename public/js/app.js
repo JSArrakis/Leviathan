@@ -14,7 +14,7 @@ board.on("ready", function() {
             pin: 10,
             startAt: 90
         })
-        servo.min();
+        servo.to(10);
         socket.on('valueData', function(data){
             var blinkRate = data * 100;
             console.log(blinkRate);
