@@ -11,7 +11,6 @@ board.on("ready", function() {
     console.log("Board Ready!")
     io.on("connection", function(socket) {
         var servo = new five.Servo(10);
-        led.blink(1000);
         socket.on('valueData', function(data){
             var angle = data;
             console.log(angle);
