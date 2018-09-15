@@ -16,8 +16,8 @@ board.on("ready", function() {
             angle = data;
         });
         setInterval(function(){
-            console.log(angle);
-        }, 500);
+            servo.to(angle);
+        }, 10);
     }); 
 });
 
