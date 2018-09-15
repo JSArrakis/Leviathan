@@ -11,11 +11,14 @@ board.on("ready", function() {
     console.log("Board Ready!")
     io.on("connection", function(socket) {
         var servo = new five.Servo(10);
+        var angle = 90;
         socket.on('valueData', function(data){
-            var angle = data;
+            angle = data;
             console.log(angle);
-            servo.to(angle, 10);
         });
+        setInterval(function(){
+            console.log(angle);
+        }, 500);
     }); 
 });
 
