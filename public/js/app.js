@@ -24,6 +24,7 @@ io.on("connection", function(socket) {
         });
         socket.on("data", function(data){
             angle = data;
+            console.log(data);
         });
         setInterval(function(){moveTo()}, 10);
         function moveTo() {
