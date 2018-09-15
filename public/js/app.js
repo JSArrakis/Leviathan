@@ -7,9 +7,7 @@ var board = new five.Board({
   port: "/dev/ttyACM0"
 });
 
-console.log("Ready!");
-
-
+console.log("NodeBot Started!");
 
 io.on("connection", function(socket) {
     board.on("ready", function() {
@@ -17,25 +15,22 @@ io.on("connection", function(socket) {
             pin: 10,
             startAt: 90
         });
-        var angle = 90;
-        var currentAngle = 90;
-        this.repl.inject({
-            servo: servo
-        });
+        // var angle = 90;
+        // var currentAngle = 90;
+        console.log("Ready!");
         socket.on("data", function(data){
-            angle = data;
             console.log(data);
         });
-        setInterval(function(){moveTo()}, 10);
-        function moveTo() {
-            if(currentAngle !== angle){
-                if(angle - currentAngle > 0){
-                    servo.to(currentAngle + 1);
-                } else if(angle - currentAngle < 0 ){
-                    servo.to(currentAngle - 1);
-                }
-            }
-        }
+        // setInterval(function(){moveTo()}, 10);
+        // function moveTo() {
+        //     if(currentAngle !== angle){
+        //         if(angle - currentAngle > 0){
+        //             servo.to(currentAngle + 1);
+        //         } else if(angle - currentAngle < 0 ){
+        //             servo.to(currentAngle - 1);
+        //         }
+        //     }
+        // }
     }); 
 });
 
