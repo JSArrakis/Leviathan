@@ -1,4 +1,3 @@
-
 var app = require("express")();
 var server = require("http").Server(app);
 var io = require("socket.io")(server);
@@ -7,30 +6,19 @@ var board = new five.Board({
   port: "/dev/ttyACM0"
 });
 
-console.log("NodeBot Started!");
+console.log("Ready!");
+
 
 io.on("connection", function(socket) {
     board.on("ready", function() {
-        var servo = new five.Servo({
-            pin: 10,
-            startAt: 90
+        var servo = new five.Servo(10);
+        this.repl.inject({
+            servo: servo
         });
-        // var angle = 90;
-        // var currentAngle = 90;
-        console.log("Ready!");
         socket.on("data", function(data){
-            console.log(data);
+
         });
-        // setInterval(function(){moveTo()}, 10);
-        // function moveTo() {
-        //     if(currentAngle !== angle){
-        //         if(angle - currentAngle > 0){
-        //             servo.to(currentAngle + 1);
-        //         } else if(angle - currentAngle < 0 ){
-        //             servo.to(currentAngle - 1);
-        //         }
-        //     }
-        // }
+        servo.sweep();
     }); 
 });
 
