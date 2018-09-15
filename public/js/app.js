@@ -14,7 +14,7 @@ board.on("ready", function() {
         socket.on('valueData', function(data){
             var angle = data;
             console.log(angle);
-            servo.to(angle);
+            servo.to(angle, 2000);
         });
     }); 
 });
