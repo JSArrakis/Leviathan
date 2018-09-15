@@ -10,16 +10,31 @@ var board = new five.Board({
 console.log("Ready!");
 
 
+
 io.on("connection", function(socket) {
     board.on("ready", function() {
-        var servo = new five.Servo(10);
+        var servo = new five.Servo({
+            pin: 10,
+            startAt: 90
+        });
+        var angle = 90;
+        var currentAngle = 90;
         this.repl.inject({
             servo: servo
         });
+        var moveTo = () => {
+            if(currentAngle !== angle){
+                if(angle - currentAngle > 0){
+                    servo.to(currentAngle + 1);
+                } else if(angle - currentAngle < 0 ){
+                    servo.to(currentAngle - 1);
+                }
+            }
+        }
         socket.on("data", function(data){
-
+            angle = data;
         });
-        servo.sweep();
+        setInverval(moveTo(angle),1);
     }); 
 });
 
