@@ -10,12 +10,15 @@ console.log("Nodebot Started!");
 board.on("ready", function() {
     console.log("Board Ready!")
     io.on("connection", function(socket) {
-        var led = new five.Led(13);
-        led.blink(1000);
+        var servo = new five.Servo({
+            pin: 10,
+            startAt: 90
+        })
+        servo.to(0);
+        servo.to(180);
         socket.on('valueData', function(data){
             var blinkRate = data * 100;
             console.log(blinkRate);
-            led.blink(blinkRate);
         });
     }); 
 });
