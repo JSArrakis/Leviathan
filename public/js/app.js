@@ -23,7 +23,6 @@ io.on("connection", function(socket) {
             servo: servo
         });
         socket.on("data", function(data){
-            servo.to(data);
             console.log(data);
         });
         // setInterval(function(){moveTo()}, 10);
