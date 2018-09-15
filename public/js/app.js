@@ -22,7 +22,7 @@ io.on("connection", function(socket) {
         this.repl.inject({
             servo: servo
         });
-        server.to(90);
+        servo.to(90);
         socket.on("data", function(data){
             servo.to(data);
             console.log(data);
