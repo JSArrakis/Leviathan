@@ -22,11 +22,10 @@ io.on("connection", function(socket) {
         this.repl.inject({
             servo: servo
         });
-        var cadence;
         socket.on("data", function(data){
             angle = data;
         });
-        cadence = setInterval(moveTo(),10);
+        setInterval(function(){moveTo()}, 10);
         function moveTo() {
             if(currentAngle !== angle){
                 if(angle - currentAngle > 0){
