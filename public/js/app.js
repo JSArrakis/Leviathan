@@ -34,7 +34,7 @@ io.on("connection", function(socket) {
         socket.on("data", function(data){
             angle = data;
         });
-        setInverval(moveTo(angle),1);
+        setInterval(moveTo(angle),1);
     }); 
 });
 
