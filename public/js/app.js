@@ -27,7 +27,7 @@ io.on("connection", function(socket) {
             servo.to(data);
             console.log(data);
         });
-        setInterval(function(){moveTo()}, 10);
+        // setInterval(function(){moveTo()}, 10);
         // function moveTo() {
         //     if(currentAngle !== angle){
         //         if(angle - currentAngle > 0){
