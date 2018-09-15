@@ -14,7 +14,6 @@ board.on("ready", function() {
         var angle = 90;
         socket.on('valueData', function(data){
             angle = data;
-            console.log(angle);
         });
         setInterval(function(){
             console.log(angle);
