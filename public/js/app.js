@@ -17,25 +17,26 @@ io.on("connection", function(socket) {
             pin: 10,
             startAt: 90
         });
-        var angle = 90;
-        var currentAngle = 90;
+        // var angle = 90;
+        // var currentAngle = 90;
         this.repl.inject({
             servo: servo
         });
+        server.to(90);
         socket.on("data", function(data){
-            angle = data;
+            servo.to(data);
             console.log(data);
         });
         setInterval(function(){moveTo()}, 10);
-        function moveTo() {
-            if(currentAngle !== angle){
-                if(angle - currentAngle > 0){
-                    servo.to(currentAngle + 1);
-                } else if(angle - currentAngle < 0 ){
-                    servo.to(currentAngle - 1);
-                }
-            }
-        }
+        // function moveTo() {
+        //     if(currentAngle !== angle){
+        //         if(angle - currentAngle > 0){
+        //             servo.to(currentAngle + 1);
+        //         } else if(angle - currentAngle < 0 ){
+        //             servo.to(currentAngle - 1);
+        //         }
+        //     }
+        // }
     }); 
 });
 
