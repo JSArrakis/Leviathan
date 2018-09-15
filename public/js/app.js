@@ -22,7 +22,12 @@ io.on("connection", function(socket) {
         this.repl.inject({
             servo: servo
         });
-        var moveTo = () => {
+        
+        socket.on("data", function(data){
+            angle = data;
+        });
+        setInterval(moveTo(),1);
+        function moveTo() {
             if(currentAngle !== angle){
                 if(angle - currentAngle > 0){
                     servo.to(currentAngle + 1);
@@ -31,10 +36,6 @@ io.on("connection", function(socket) {
                 }
             }
         }
-        socket.on("data", function(data){
-            angle = data;
-        });
-        setInterval(moveTo(angle),1);
     }); 
 });
 
