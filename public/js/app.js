@@ -16,7 +16,7 @@ io.on("connection", function(socket) {
             servo: servo
         });
         socket.on("data", function(data){
-
+            console.log(data);
         });
         servo.sweep();
     }); 
