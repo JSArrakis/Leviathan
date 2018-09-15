@@ -15,7 +15,7 @@
         var val = $(this).val();
         display.text(val);
         console.log('emiting val', val)
-        socket.emit('data', val);
+        socket.emit('valueData', val);
       });
     });
   </script>

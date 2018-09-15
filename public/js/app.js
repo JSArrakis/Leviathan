@@ -6,14 +6,13 @@ var board = new five.Board({
   port: "/dev/ttyACM0"
 });
 
-console.log("Ready!");
-
-
-io.on("connection", function(socket) {
-    board.on("ready", function() {
+console.log("Nodebot Started!");
+board.on("ready", function() {
+    console.log("Board Ready!")
+    io.on("connection", function(socket) {
         var led = new five.Led(13);
         led.blink(1000);
-        socket.on("data", function(data){
+        socket.on('valueData', function(data){
             var blinkRate = data * 100;
             console.log(blinkRate);
             led.blink(blinkRate);
