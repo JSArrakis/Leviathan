@@ -9,8 +9,6 @@ var board = new five.Board({
 console.log("Nodebot Started!");
 board.on("ready", function() {
     console.log("Board Ready!")
-    var angle;
-    var speed;
     io.on("connection", function(socket) {
         var one = new five.Servo({
             controller: "PCA9685",
@@ -18,10 +16,10 @@ board.on("ready", function() {
         });
         socket.on('valueData', function(data){
             if(data !== angle){
-                angle = data;
+                var angle = data;
                 console.log(angle);
                 one.stop();
-                one.to(angle, 500);
+                one.to(angle, 10);
             }
         });
     }); 
