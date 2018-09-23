@@ -14,11 +14,13 @@ board.on("ready", function() {
             controller: "PCA9685",
             pin: 15,
         });
+        var targetAngle;
+        var targetSpeed;
         socket.on('valueData', function(data){
             var angle = data;
             console.log(angle);
             one.stop();
-            one.to(angle, 1000);
+            one.to(angle, 500);
         });
     }); 
 });
