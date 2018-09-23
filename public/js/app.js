@@ -12,15 +12,14 @@ board.on("ready", function() {
     io.on("connection", function(socket) {
         var one = new five.Servo({
             controller: "PCA9685",
-            pin: 0,
+            pin: 15,
         });
-        one.sweep();
-        // socket.on('valueData', function(data){
-        //     var angle = data;
-        //     console.log(angle);
-        //     one.stop();
-        //     one.to(angle, 1000);
-        // });
+        socket.on('valueData', function(data){
+            var angle = data;
+            console.log(angle);
+            one.stop();
+            one.to(angle, 1000);
+        });
     }); 
 });
 
