@@ -10,12 +10,17 @@ console.log("Nodebot Started!");
 board.on("ready", function() {
     console.log("Board Ready!")
     io.on("connection", function(socket) {
-        var servo = new five.Servo(10);
+        var one = new five.Servo({
+            address: 0x40,
+            controller: "PCA9685",
+            pin: 13,
+        });
+        var two
         socket.on('valueData', function(data){
             var angle = data;
             console.log(angle);
-            servo.stop();
-            servo.to(angle, 5000);
+            one.stop();
+            one.to(angle, 1000);
         });
     }); 
 });
