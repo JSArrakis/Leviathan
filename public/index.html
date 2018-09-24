@@ -11,17 +11,39 @@
       socket.on('connect', function() {
         console.log('check 2', socket.connected);
       });
-      $("#slider").on("input",function() {
+      $("#slider1").on("input",function() {
         var val = $(this).val();
         display.text(val);
         console.log('emiting val', val)
-        socket.emit('valueData', val);
+        socket.emit('valueData1', val);
+      });
+      $("#slider2").on("input",function() {
+        var val = $(this).val();
+        display.text(val);
+        console.log('emiting val', val)
+        socket.emit('valueData2', val);
+      });
+      $("#slider3").on("input",function() {
+        var val = $(this).val();
+        display.text(val);
+        console.log('emiting val', val)
+        socket.emit('valueData3', val);
       });
     });
   </script>
 </head>
 <body>
-  <h1>Current Val: <span>90</span></h1>
-  Fast <input id="slider" type="range" min="0" max="180" value="90"> Slow
+  <div>
+      <h1>Current Val: <span>90</span></h1>
+      0 <input id="slider1" type="range" min="0" max="180" value="90"> 180
+  </div>
+  <div>
+      <h1>Current Val: <span>90</span></h1>
+      0 <input id="slider2" type="range" min="0" max="180" value="90"> 180
+  </div>
+  <div>
+      <h1>Current Val: <span>90</span></h1>
+      0 <input id="slider3" type="range" min="0" max="180" value="90"> 180
+  </div>
 </body>
 </html>
